@@ -9,30 +9,15 @@ import { Title, TitleContactsSection } from './App.styled';
 import { Background } from 'components/constants/Background.styled';
 
 export const App = () => {
-  const [firstRender, setFirstRender] = useState(true);
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(
+    JSON.parse(window.localStorage.getItem('contacts')) ?? initialContacts
+  );
   const [visibleContacts, setVisibleContacts] = useState([]);
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    // перший рендер
-    const contactsLocalStorage = JSON.parse(localStorage.getItem('contacts'));
-    if (!contactsLocalStorage) {
-      localStorage.setItem('contacts', JSON.stringify(initialContacts));
-      setContacts(contactsLocalStorage);
-      setFirstRender(false);
-    } else {
-      setContacts(contactsLocalStorage);
-      setFirstRender(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (firstRender) {
-      return;
-    }
     window.localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts, firstRender]);
+  }, [contacts]);
 
   useEffect(() => {
     if (!filter) {
