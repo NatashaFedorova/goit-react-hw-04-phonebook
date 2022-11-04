@@ -15,9 +15,9 @@ const initialValues = {
 };
 
 const nameCheck = (contacts, value) => {
-  return contacts.find(({ name }) => value.toLowerCase() === name.toLowerCase())
-    ? true
-    : false;
+  return contacts.find(
+    ({ name }) => value.toLowerCase() === name.toLowerCase()
+  );
 };
 
 const ContactForm = ({ contacts, onSelect }) => {
